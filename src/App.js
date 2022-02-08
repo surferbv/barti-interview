@@ -1,10 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Stack } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import SearchBar from "./Components/SearchBar";
+import SearchResultsList from "./Components/SearchResultsList";
+
+const Item = styled("div")(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
+
+
 
 function App() {
   return (
     <div className="App">
       <h1>Barti Client App</h1>
+      <Stack sx={{ align: "center" }}>
+        <Item>
+          <SearchBar/>
+        </Item>
+
+        <Item>
+          <SearchResultsList/>
+        </Item>
+      </Stack>
     </div>
   );
 }
