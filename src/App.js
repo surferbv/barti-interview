@@ -2,7 +2,7 @@ import "./App.css";
 import { Stack } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import SearchBar from "./Components/SearchBar";
-import SearchResultsList from "./Components/SearchResultsList";
+import PatientDataGrid from "./Components/PatientDataGrid";
 
 const Item = styled("div")(({ theme }) => ({
   ...theme.typography.body2,
@@ -23,7 +23,7 @@ function App() {
         </Item>
 
         <Item>
-          <SearchResultsList/>
+          <PatientDataGrid/>
         </Item>
       </Stack>
     </div>
