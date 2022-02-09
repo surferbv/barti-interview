@@ -16,7 +16,7 @@ const Item = styled("div")(({ theme }) => ({
 function App() {
   return (
     <div className="App">
-      <h1>Barti Client App</h1>
+      <h1>Barti Patients App</h1>
       <Stack sx={{ align: "center" }}>
         <Item>
           <SearchBar/>
