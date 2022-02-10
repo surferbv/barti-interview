@@ -18,16 +18,21 @@ const Item = styled("div")(({ theme }) => ({
 
 function App() {
   
+  const [patients, setPatients] = useState([]);
+  
   const [value, setValue] = useState('');
 
   const [options, setOptions] = useState([]);
 
+
   useEffect(()=>{
 
-    getPatients()
+    getPatients(value)
       .then( patientsData => {
         
         const tempOptions = []
+
+        setPatients( patientsData );
         
         patientsData.forEach( (patient) => { 
 
@@ -37,18 +42,18 @@ function App() {
 
         })
       })
-    },[])
+    },[ value ])
 
   return (
     <div className="App">
       <h1>Barti Patients App</h1>
       <Stack sx={{ align: "center" }}>
         <Item>
-          <SearchBar options={options} value={value} setValue={setValue} />
+          <SearchBar options={ options } value={ value } setValue={ setValue } />
         </Item>
 
         <Item>
-          <PatientDataGrid />
+          <PatientDataGrid getPatients={ patients } />
         </Item>
       </Stack>
     </div>
