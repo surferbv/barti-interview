@@ -7,17 +7,17 @@ const columns = [
     field: 'firstName',
     headerName: 'First name',
     width: 150,
-    editable: true,
+    editable: false,
   },
   {
     field: 'lastName',
     headerName: 'Last name',
     width: 150,
-    editable: true,
+    editable: false,
   }
 ];
 
-const rows = [
+let rows = [
   { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
   { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
   { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
@@ -29,7 +29,15 @@ const rows = [
   { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
 ];
 
-export default function PatientDataGrid() {
+export default function PatientDataGrid(props) {
+
+  const patients = props.getPatients;
+  
+  rows = patients;
+
+  console.log("Called in DataGrid comp")
+  console.log(patients);
+
   return (
     <div style={{ height: 400, width: '100%' }}>
       <DataGrid
