@@ -3,6 +3,9 @@ import { Stack } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import SearchBar from "./Components/SearchBar";
 import PatientDataGrid from "./Components/PatientDataGrid";
+import { useEffect, useState } from "react";
+import getPatients from "./Services/PatientApi";
+
 
 const Item = styled("div")(({ theme }) => ({
   ...theme.typography.body2,
@@ -14,16 +17,38 @@ const Item = styled("div")(({ theme }) => ({
 
 
 function App() {
+  
+  const [value, setValue] = useState('');
+
+  const [options, setOptions] = useState([]);
+
+  useEffect(()=>{
+
+    getPatients()
+      .then( patientsData => {
+        
+        const tempOptions = []
+        
+        patientsData.forEach( (patient) => { 
+
+          tempOptions.push(patient.fullName);
+
+          setOptions(tempOptions);
+
+        })
+      })
+    },[])
+
   return (
     <div className="App">
       <h1>Barti Patients App</h1>
       <Stack sx={{ align: "center" }}>
         <Item>
-          <SearchBar/>
+          <SearchBar options={options} value={value} setValue={setValue} />
         </Item>
 
         <Item>
-          <PatientDataGrid/>
+          <PatientDataGrid />
         </Item>
       </Stack>
     </div>
