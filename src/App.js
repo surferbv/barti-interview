@@ -25,24 +25,41 @@ function App() {
   const [options, setOptions] = useState([]);
 
 
-  useEffect(()=>{
+  useEffect( () => {
+    
+    setValue(window.localStorage.getItem('value'));
+  
+  }, []);
+
+  // setPatients
+  useEffect( () => {
 
     getPatients(value)
       .then( patientsData => {
         
-        const tempOptions = []
-
         setPatients( patientsData );
+        window.localStorage.setItem('value', value);
         
-        patientsData.forEach( (patient) => { 
-
-          tempOptions.push(patient.fullName);
-
-          setOptions(tempOptions);
-
-        })
       })
     },[ value ])
+
+  // setOptions
+  useEffect( () => {
+
+    getPatients()
+      .then( patientsData => { 
+      
+      const fullNameOptions = []
+        
+      patientsData.forEach( (patient) => { 
+
+        fullNameOptions.push(patient.fullName);
+
+        setOptions(fullNameOptions);
+
+      })
+    })
+  },[])
 
   return (
     <div className="App">
