@@ -11,32 +11,11 @@ export default function SearchBar(props) {
 
   const setValue = props.setValue;
   
-  // const [value, setValue] = React.useState('');
-  
   const [inputValue, setInputValue] = React.useState('');
-
-  // const [options, setOptions] = React.useState([]);
 
   const filterOptions = createFilterOptions({
     limit: 20
   });
-
-  // React.useEffect(()=>{
-    
-  //   getPatients()
-  //     .then( patientsData => {
-        
-  //       const tempOptions = []
-        
-  //       patientsData.forEach( (patient) => { 
-
-  //         tempOptions.push(patient.fullName);
-
-  //         setOptions(tempOptions);
-
-  //       })
-  //     })
-  //   },[])
 
   return (
       <div>
