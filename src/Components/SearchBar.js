@@ -1,19 +1,50 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+import { createFilterOptions } from '@mui/material/Autocomplete';
 
-export default function SearchBar() {
-  const [value, setValue] = React.useState('');
+export default function SearchBar(props) {
+
+  const options = props.options;
+
+  const value = props.value;
+
+  const setValue = props.setValue;
+  
+  // const [value, setValue] = React.useState('');
+  
   const [inputValue, setInputValue] = React.useState('');
 
+  // const [options, setOptions] = React.useState([]);
 
-  
+  const filterOptions = createFilterOptions({
+    limit: 20
+  });
+
+  // React.useEffect(()=>{
+    
+  //   getPatients()
+  //     .then( patientsData => {
+        
+  //       const tempOptions = []
+        
+  //       patientsData.forEach( (patient) => { 
+
+  //         tempOptions.push(patient.fullName);
+
+  //         setOptions(tempOptions);
+
+  //       })
+  //     })
+  //   },[])
+
   return (
       <div>
         <div>{`value: ${value !== null ? `'${value}'` : 'null'}`}</div>
         <div>{`inputValue: '${inputValue}'`}</div>
         <Autocomplete
           freeSolo
+          filterOptions={filterOptions}
           id="search-bar"
 
           inputValue={inputValue}
@@ -27,7 +58,8 @@ export default function SearchBar() {
           }}
 
           disableClearable
-          options={top100Films.map((option) => option.title)}
+          // options={top100Films.map((option) => option.title)}
+          options={options}
           renderInput={(params) => ( 
             <TextField {...params} label="Search" InputProps={{...params.InputProps, type: 'search'}}/>
           )}
