@@ -21,7 +21,7 @@ export default function PatientDataGrid(props) {
 
   const patients = props.getPatients;
   
-  rows = patients;
+  const rows = patients;
 
   return (
     <div style={{ height: 400, width: '100%' }}>
