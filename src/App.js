@@ -17,6 +17,9 @@ const Item = styled("div")(({ theme }) => ({
 
 
 function App() {
+
+  // gets the value from local storage
+  const storedValue = localStorage.getItem( "value" );
   
   const [patients, setPatients] = useState([]);
   
