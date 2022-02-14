@@ -27,6 +27,12 @@ function App() {
 
   const [options, setOptions] = useState([]);
 
+  // sets the value if it is null returns empty string
+  const [value, setValue] = useState( 
+    
+    storedValue == 'null' ? '' : storedValue 
+
+  );
 
   useEffect( () => {
     
