@@ -27,7 +27,7 @@ function App() {
   // sets the value if it is null returns empty string
   const [value, setValue] = useState( 
     
-    storedValue == 'null' ? '' : storedValue 
+    storedValue === 'null' ? '' : storedValue 
 
   );
 
