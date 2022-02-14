@@ -6,15 +6,12 @@ import PatientDataGrid from "./Components/PatientDataGrid";
 import { useEffect, useState } from "react";
 import getPatients from "./Services/PatientApi";
 
-
 const Item = styled("div")(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
-
-
 
 function App() {
 
@@ -23,9 +20,9 @@ function App() {
   
   const [patients, setPatients] = useState([]);
   
-  const [value, setValue] = useState('');
-
   const [options, setOptions] = useState([]);
+
+  const [inputValue, setInputValue] = useState('');
 
   // sets the value if it is null returns empty string
   const [value, setValue] = useState( 
@@ -34,23 +31,23 @@ function App() {
 
   );
 
+  // save value 
   useEffect( () => {
     
-    setValue(window.localStorage.getItem('value'));
+    localStorage.setItem('value', value)
   
-  }, []);
+  }, [value]);
 
-  // setPatients
+  // setPatients to update data grid depends on value change
   useEffect( () => {
 
     getPatients(value)
       .then( patientsData => {
         
         setPatients( patientsData );
-        window.localStorage.setItem('value', value);
         
       })
-    },[ value ])
+    },[value])
 
   // setOptions
   useEffect( () => {
@@ -75,7 +72,15 @@ function App() {
       <h1>Barti Patients App</h1>
       <Stack sx={{ align: "center" }}>
         <Item>
-          <SearchBar options={ options } value={ value } setValue={ setValue } />
+          <SearchBar 
+          options={ options } 
+
+          value={ value } 
+          setValue={ setValue } 
+          
+          inputValue={ inputValue } 
+          setInputValue={ setInputValue }
+          />
         </Item>
 
         <Item>
