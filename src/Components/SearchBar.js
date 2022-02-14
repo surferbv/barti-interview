@@ -36,7 +36,7 @@ export default function SearchBar(props) {
             setValue(newValue);
           }}
 
-          disableClearable
+          
           options={options}
           renderInput={(params) => ( 
             <TextField {...params} label="Search" InputProps={{...params.InputProps, type: 'search'}}/>
