@@ -7,20 +7,23 @@ export default function SearchBar(props) {
 
   const options = props.options;
 
+  const inputValue = props.inputValue;
+
+  const setInputValue = props.setInputValue;
+
   const value = props.value;
 
   const setValue = props.setValue;
   
-  const [inputValue, setInputValue] = React.useState('');
-
+  
   const filterOptions = createFilterOptions({
     limit: 20
   });
 
   return (
       <div>
-        <div>{`value: ${value !== null ? `'${value}'` : 'null'}`}</div>
-        <div>{`inputValue: '${inputValue}'`}</div>
+        {/* <div>{`value: ${value !== null ? `'${value}'` : 'null'}`}</div>
+        <div>{`inputValue: '${inputValue}'`}</div> */}
         <Autocomplete
           freeSolo
           filterOptions={filterOptions}
