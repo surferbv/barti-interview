@@ -16,7 +16,7 @@ const Item = styled("div")(({ theme }) => ({
 function App() {
 
   // gets the value from local storage
-  const storedValue = localStorage.getItem( "value" );
+  const storedValue = JSON.parse( localStorage.getItem( 'value' ) );
   
   const [patients, setPatients] = useState([]);
   
@@ -34,7 +34,7 @@ function App() {
   // save value 
   useEffect( () => {
     
-    localStorage.setItem('value', value)
+    localStorage.setItem('value', JSON.stringify( value ))
   
   }, [value]);
 
@@ -69,7 +69,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Barti Patients App</h1>
+      <h1>Barti Patient App</h1>
       <Stack sx={{ align: "center" }}>
         <Item>
           <SearchBar 
