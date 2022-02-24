@@ -17,7 +17,10 @@ function App() {
 
   // gets the value from local storage
   const storedValue = JSON.parse( localStorage.getItem( 'value' ) );
-  
+
+  // If searhHistory local storage exists set it searchHistory else set it to a new object {}
+  const searchHistory = localStorage.getItem( 'searchHistory' ) ? JSON.parse( localStorage.getItem( 'searchHistory' ) ) : { history:[] }; 
+
   const [patients, setPatients] = useState([]);
   
   const [options, setOptions] = useState([]);
@@ -31,10 +34,19 @@ function App() {
 
   );
 
-  // save value 
+  // save value to local storage
   useEffect( () => {
     
-    localStorage.setItem('value', JSON.stringify( value ))
+    localStorage.setItem('value', JSON.stringify( value ));
+
+    // Guard against null values     
+    if(value && value !== " "){
+      // When value changes we push it as a new key value pair into searchHistory
+      searchHistory.history.push( { value } );
+  
+      // Then we stringify the searchHistory object and set it to the searchHistory localstorage
+      localStorage.setItem('searchHistory', JSON.stringify( searchHistory ));
+    }
   
   }, [value]);
 
@@ -60,6 +72,8 @@ function App() {
       patientsData.forEach( (patient) => { 
 
         fullNameOptions.push(patient.fullName);
+
+        console.log(fullNameOptions);
 
         setOptions(fullNameOptions);
 
