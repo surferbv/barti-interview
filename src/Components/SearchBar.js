@@ -5,16 +5,15 @@ import { createFilterOptions } from '@mui/material/Autocomplete';
 
 export default function SearchBar(props) {
 
-  const options = props.options;
+  const patientList = props.options; // array of options to select for autocomplete dropdown
 
-  const inputValue = props.inputValue;
+  const inputValue = props.inputValue; // state enterd into the input value
 
-  const setInputValue = props.setInputValue;
+  const setInputValue = props.setInputValue; // set state of the input value
 
-  const value = props.value;
+  const value = props.value; // state of the value
 
-  const setValue = props.setValue;
-  
+  const setValue = props.setValue; // set state value
   
   const filterOptions = createFilterOptions({
     limit: 20
@@ -40,12 +39,12 @@ export default function SearchBar(props) {
             setValue(newValue);
           }}
 
-          
-          options={options}
-          renderInput={(params) => ( 
-            <TextField {...params} label="Search" InputProps={{...params.InputProps, type: 'search'}}/>
-          )}
+          options={patientList}
+          renderInput={ (params)=> <TextField {...params} label="PatientName" /> }
+
+          sx={{ width: 400 }}
         />
+     
       </div>
   );
 }

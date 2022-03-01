@@ -42,8 +42,18 @@ function App() {
     // Guard against null values     
     if(value && value !== " "){
       // When value changes we push it as a new key value pair into searchHistory
-      searchHistory.history.push( { value } );
-  
+      console.log("Value:", value)
+      console.log("SearchHistory: ", searchHistory.history );
+      if( searchHistory.history.length < 10){
+        if (searchHistory.history.indexOf( value )){
+          searchHistory.history.push(  value  );
+        }
+      }else{
+        if (searchHistory.history.indexOf( value )){
+          searchHistory.history.shift(); // remove the last item entered 
+          searchHistory.history.push(  value  ); // add new item
+        }
+      }
       // Then we stringify the searchHistory object and set it to the searchHistory localstorage
       localStorage.setItem('searchHistory', JSON.stringify( searchHistory ));
     }
@@ -67,19 +77,23 @@ function App() {
     getPatients()
       .then( patientsData => { 
       
+      const searchHistoryList = searchHistory.history
       const fullNameOptions = []
         
       patientsData.forEach( (patient) => { 
-
         fullNameOptions.push(patient.fullName);
-
-        console.log(fullNameOptions);
-
-        setOptions(fullNameOptions);
-
       })
+
+
+      // console.log("Search History: ", searchHistoryList);
+      // console.log("Full Name Options: ", fullNameOptions);
+
+      setOptions( searchHistoryList.concat(fullNameOptions) );
+      // setOptions( patientsData );
+      // setOptions( fullNameOptions );
+
     })
-  },[])
+  },[value])
 
   return (
     <div className="App">
