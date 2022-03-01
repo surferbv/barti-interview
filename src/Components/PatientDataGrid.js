@@ -31,6 +31,7 @@ export default function PatientDataGrid(props) {
         pageSize={5}
         rowsPerPageOptions={[5]}
         disableSelectionOnClick
+        sx={{ width:400 }}
       />
     </div>
   );
