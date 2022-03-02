@@ -24,6 +24,7 @@ export default function SearchBar(props) {
         {/* <div>{`value: ${value !== null ? `'${value}'` : 'null'}`}</div>
         <div>{`inputValue: '${inputValue}'`}</div> */}
         <Autocomplete
+          className="center-block"
           loading
           freeSolo
           filterOptions={filterOptions}

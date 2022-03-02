@@ -26,12 +26,13 @@ export default function PatientDataGrid(props) {
   return (
     <div style={{ height: 400, width: '100%' }}>
       <DataGrid
+        className="center-block"
         rows={rows}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
         disableSelectionOnClick
-        sx={{ width:400 }}
+        sx={{ width:500 }}
       />
     </div>
   );

@@ -97,10 +97,11 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Barti Patient App</h1>
-      <Stack sx={{ align: "center" }}>
-        <Item>
+      <h1 className="center-align-inside" >Barti Patient App</h1>
+      <Stack >
+        <Item >
           <SearchBar 
+          
           options={ options } 
 
           value={ value } 
