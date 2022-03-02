@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Horizontal center block element */
+.center-block {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Center text or blah inside an element */
+.center-align-inside {
+  text-align: center;
+}
