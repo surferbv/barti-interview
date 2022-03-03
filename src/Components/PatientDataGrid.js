@@ -20,10 +20,8 @@ export default function PatientDataGrid(props) {
       editable: false,
     }
   ];
-  
-  const patients = props.getPatients;
-  
-  const rows = patients;
+
+  const patientRows = props.getPatients;
 
   const [rowState, setRowState] = useState({
     page: 0,
@@ -38,7 +36,7 @@ export default function PatientDataGrid(props) {
         paginationMode='server'
         rowCount={5} 
         className="center-block"
-        rows={rows}
+        rows={patientRows}
         columns={titleColumns}
         pageSize={5}
         rowsPerPageOptions={[5]}
