@@ -7,9 +7,7 @@ import Container from "@mui/material/Container";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Container
-      className="my-container"
-    >
+    <Container>
       <App />
     </Container>
   </React.StrictMode>,
