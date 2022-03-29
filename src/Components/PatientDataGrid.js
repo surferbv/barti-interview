@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 export default function PatientDataGrid(props) {
   
-  const titleColumns = [
+  const dataGridColumnsTitle = [
     { field: 'id', headerName: 'ID', width: 90 },
     {
       field: 'firstName',
@@ -21,29 +21,37 @@ export default function PatientDataGrid(props) {
     }
   ];
 
-  const patientRows = props.getPatients;
+  const patientRowsData = props.getPatientsData;
 
+  // // TODO: rowState?
   const [rowState, setRowState] = useState({
-    page: 0,
-    pageSize: 5,
-    row:[],
+    page: 0,      // ?page=10
+    pageSize: 5,  // ?limit=3
+    rows:[],      // Holds our 
     loading: false
   });
 
   return (
     <div style={{ height: 400, width: '100%' }}>
       <DataGrid
+        className="center-block"
+        
+        columns={dataGridColumnsTitle}
+        
+        // rowState
+        // page                    // Zero based index of the current page
+        // pageSize={5}            // Set the number of rows in one page. If so of the rows have children for instance in the tree data this number represents the amount of the top level rows wanted on each page. 
+        // rows={patientRowsData}  // Set of rows of type GridRowsProp
+        // loading
+        {...rowState}
+
         paginationMode='server'
         rowCount={5} 
-        className="center-block"
-        rows={patientRows}
-        columns={titleColumns}
-        pageSize={5}
         rowsPerPageOptions={[5]}
 
-        onPageChange={ ( page )=>(
-          console.log("Page:", page)
-        )}
+        // onPageChange={ (page)=> setRowState( (prev)=>({...prev, page}) ) }
+        // onPageSizeChange={ (pageSize)=> setRowState( (prev)=>({...prev, pageSize}) ) }
+
 
         disableSelectionOnClick
         sx={{ width:500 }}
