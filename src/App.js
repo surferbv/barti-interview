@@ -14,31 +14,39 @@ const Item = styled("div")(({ theme }) => ({
 }));
 
 function App() {
+  // If searhHistory local storage exists set it searchHistory else set it to a new object {}
+  const searchHistory = localStorage.getItem( 'searchHistory' ) ? JSON.parse( localStorage.getItem( 'searchHistory' ) ) : { history:[] }; 
 
   // gets the value from local storage
   const storedValue = JSON.parse( localStorage.getItem( 'value' ) );
 
-  // If searhHistory local storage exists set it searchHistory else set it to a new object {}
-  const searchHistory = localStorage.getItem( 'searchHistory' ) ? JSON.parse( localStorage.getItem( 'searchHistory' ) ) : { history:[] }; 
-
+  // Patient records array and object
   const [patients, setPatients] = useState([]);
   
+  // Patient full name array and string
   const [options, setOptions] = useState([]);
 
+  // Input value from auto complete string
   const [inputValue, setInputValue] = useState('');
 
+  // Value entered from the auto complete field string
   // sets the value if it is null returns empty string
   const [value, setValue] = useState( 
-    
     storedValue === 'null' ? '' : storedValue 
-
   );
 
+  // Pagination
+  const [rowState, setRowState] = useState({
+    page: 1,      // ?page=10
+    pageSize: 5,  // ?limit=3
+    rows:[],      // Holds oure user data
+    loading: false 
+  });
+
+  // Local Storage
   // save value to local storage
   useEffect( () => {
-    
     localStorage.setItem('value', JSON.stringify( value ));
-
     // Guard against null values     
     if(value && value !== " "){
       // When value changes we push it as a new key value pair into searchHistory
@@ -60,20 +68,25 @@ function App() {
   
   }, [value]);
 
+  // Data Grid
   // setPatients to update data grid depends on value change
   useEffect( () => {
 
+    // String
+    const queryParam = `?search=${value}&page=${rowState.page}&limit=${rowState.pageSize}`;
+
+    console.log("Query String:", queryParam)
+
     getPatients(value)
       .then( patientsData => {
-        
         setPatients( patientsData );
-        
+        // setRowState((prev)=>({...prev, loading: true}));
       })
     },[value])
 
-  // setOptions
+  // Auto Complete
+  // setOptions to update the drop down
   useEffect( () => {
-
     getPatients()
       .then( patientsData => { 
       
@@ -83,10 +96,6 @@ function App() {
       patientsData.forEach( (patient) => { 
         fullNameOptions.push(patient.fullName);
       })
-
-
-      // console.log("Search History: ", searchHistoryList);
-      // console.log("Full Name Options: ", fullNameOptions);
 
       setOptions( searchHistoryList.concat(fullNameOptions) );
       // setOptions( patientsData );
@@ -101,7 +110,7 @@ function App() {
       <Stack >
         <Item >
           <SearchBar 
-          
+
           options={ options } 
 
           value={ value } 
@@ -113,7 +122,7 @@ function App() {
         </Item>
 
         <Item>
-          <PatientDataGrid getPatients={ patients } />
+          <PatientDataGrid getPatientsData={ patients } />
         </Item>
       </Stack>
     </div>
